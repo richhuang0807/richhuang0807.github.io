@@ -1,31 +1,29 @@
-/* 字體與全局設定 */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+    display: block;
+  }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  .nav-list li {
+    display: block;
+    margin: 15px 0;
+  }
+
+  .site-header h1 {
+    font-size: 2rem;
+  }
 }
 
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: #0f1115;
-  color: #e5e5e5;
-  line-height: 1.6;
-}
+@media (max-width: 480px) {
+  body {
+    font-size: 0.95rem;
+  }
 
-/* Header */
-.site-header {
-  text-align: center;
-  padding: 80px 20px 40px;
-  background: linear-gradient(180deg, #121418 0%, #0f1115 100%);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
+  .site-header h1 {
+    font-size: 1.7rem;
+  }
 
-.site-header h1 {
-  font-size: 3rem;
-  letter-spacing: 1px;
-  color: #00c6ff;
+  .tagline {
+    font-size: 0.9rem;
+  }
+}
   animation: glow 2s infinite alternate;
 }
 
@@ -38,61 +36,4 @@ body {
   font-size: 1.1rem;
   color: #ccc;
   margin-top: 10px;
-}
-
-/* Navigation */
-.nav-list {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.nav-list a {
-  color: #00c6ff;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.nav-list a:hover {
-  color: #fff;
-}
-
-/* Main content */
-main {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 0 20px;
-}
-
-h2 {
-  color: #00b4d8;
-  border-bottom: 1px solid #1f2933;
-  padding-bottom: 5px;
-  margin-bottom: 15px;
-}
-
-/* Links */
-a {
-  color: #00c6ff;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* Footer */
-.site-footer {
-  text-align: center;
-  font-size: 0.9rem;
-  color: #777;
-  padding: 40px 0;
-  border-top: 1px solid #1f2933;
-}
-
-/* Project list */
-.projects-list li {
-  margin-bottom: 10px;
 }
