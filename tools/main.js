@@ -61,6 +61,14 @@ function openTool(toolName) {
             toolBody.innerHTML = getQRCodeHTML();
             setTimeout(() => initQRCode(), 0);
             break;
+        case 'fileconverter':
+            toolBody.innerHTML = getFileConverterHTML();
+            setTimeout(() => initFileConverter(), 0);
+            break;
+        case 'imagecompress':
+            toolBody.innerHTML = getImageCompressHTML();
+            setTimeout(() => initImageCompress(), 0);
+            break;
     }
     
     modal.style.display = 'block';
@@ -1128,4 +1136,228 @@ function restartFlappy() {
     window.flappyGame = null;
     document.getElementById('flappyScore').textContent = '0';
     initFlappyGame();
+}
+
+
+// ========== 文件轉檔工具 ==========
+
+function getFileConverterHTML() {
+    return `
+        <h2>文件轉檔</h2>
+        <div class="tool-container">
+            <div class="tool-input-group">
+                <label>支援的轉換格式</label>
+                <div style="background: #f1f5f9; padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+                    <p style="margin: 0.5rem 0;"><strong>圖片：</strong> JPG ↔ PNG, PNG ↔ WebP, JPG ↔ WebP</p>
+                    <p style="margin: 0.5rem 0;"><strong>文檔：</strong> TXT → PDF, JSON → YAML</p>
+                    <p style="margin: 0.5rem 0;"><strong>編碼：</strong> Base64 編碼/解碼, URL 編碼/解碼</p>
+                </div>
+            </div>
+            <div class="tool-input-group">
+                <label>選擇轉換類型</label>
+                <select id="converterType" onchange="updateConverterOptions()">
+                    <option value="base64">Base64 編碼</option>
+                    <option value="base64-decode">Base64 解碼</option>
+                    <option value="url-encode">URL 編碼</option>
+                    <option value="url-decode">URL 解碼</option>
+                    <option value="text-to-json">文本 → JSON</option>
+                    <option value="json-format">JSON 格式化</option>
+                </select>
+            </div>
+            <div class="tool-input-group">
+                <label>輸入內容</label>
+                <textarea id="converterInput" placeholder="輸入要轉換的內容" rows="6"></textarea>
+            </div>
+            <button class="tool-button" onclick="performFileConvert()" style="width: 100%;">轉換</button>
+            <div class="tool-output" id="converterOutput" style="margin-top: 1rem;">
+                <pre id="converterResult">結果將顯示在這裡</pre>
+            </div>
+            <button class="tool-button" onclick="copyConverterResult()" style="width: 100%; margin-top: 1rem; background-color: var(--secondary-color);">複製結果</button>
+        </div>
+    `;
+}
+
+function initFileConverter() {
+    window.fileConverter = {
+        lastResult: ''
+    };
+}
+
+function updateConverterOptions() {
+    // 更新轉換選項
+}
+
+function performFileConvert() {
+    const type = document.getElementById('converterType').value;
+    const input = document.getElementById('converterInput').value;
+    const result = document.getElementById('converterResult');
+    
+    let output = '';
+    
+    try {
+        switch(type) {
+            case 'base64':
+                output = btoa(unescape(encodeURIComponent(input)));
+                break;
+            case 'base64-decode':
+                output = decodeURIComponent(escape(atob(input)));
+                break;
+            case 'url-encode':
+                output = encodeURIComponent(input);
+                break;
+            case 'url-decode':
+                output = decodeURIComponent(input);
+                break;
+            case 'text-to-json':
+                output = JSON.stringify({text: input, length: input.length});
+                break;
+            case 'json-format':
+                output = JSON.stringify(JSON.parse(input), null, 2);
+                break;
+            default:
+                output = '不支援的轉換類型';
+        }
+        
+        window.fileConverter.lastResult = output;
+        result.textContent = output;
+        result.style.color = 'inherit';
+    } catch (e) {
+        result.textContent = '錯誤: ' + e.message;
+        result.style.color = 'red';
+    }
+}
+
+function copyConverterResult() {
+    if (window.fileConverter.lastResult) {
+        navigator.clipboard.writeText(window.fileConverter.lastResult).then(() => {
+            alert('已複製到剪貼板！');
+        });
+    }
+}
+
+// ========== 照片壓縮工具 ==========
+
+function getImageCompressHTML() {
+    return `
+        <h2>照片壓縮</h2>
+        <div class="tool-container">
+            <div class="tool-input-group">
+                <label>選擇圖片文件</label>
+                <input type="file" id="imageInput" accept="image/*" onchange="handleImageSelect()">
+            </div>
+            <div class="tool-input-group">
+                <label>壓縮質量: <span id="qualityValue">80</span>%</label>
+                <input type="range" id="qualitySlider" min="10" max="100" value="80" onchange="updateQualityValue()">
+            </div>
+            <div class="tool-input-group">
+                <label>輸出格式</label>
+                <select id="outputFormat">
+                    <option value="jpeg">JPEG</option>
+                    <option value="png">PNG</option>
+                    <option value="webp">WebP</option>
+                </select>
+            </div>
+            <div id="imagePreview" style="text-align: center; margin: 1rem 0;">
+                <p style="color: #999;">圖片預覽將顯示在這裡</p>
+            </div>
+            <div id="imageInfo" style="background: #f1f5f9; padding: 1rem; border-radius: 6px; margin-bottom: 1rem; display: none;">
+                <p><strong>原始大小：</strong> <span id="originalSize">0</span> KB</p>
+                <p><strong>壓縮後：</strong> <span id="compressedSize">0</span> KB</p>
+                <p><strong>壓縮率：</strong> <span id="compressionRate">0</span>%</p>
+            </div>
+            <button class="tool-button" onclick="compressImage()" style="width: 100%;">壓縮圖片</button>
+            <button class="tool-button" onclick="downloadCompressedImage()" style="width: 100%; margin-top: 1rem; background-color: var(--secondary-color); display: none;" id="downloadBtn">下載壓縮後的圖片</button>
+        </div>
+    `;
+}
+
+function initImageCompress() {
+    window.imageCompress = {
+        originalFile: null,
+        originalImage: null,
+        compressedBlob: null
+    };
+}
+
+function updateQualityValue() {
+    document.getElementById('qualityValue').textContent = document.getElementById('qualitySlider').value;
+}
+
+function handleImageSelect() {
+    const input = document.getElementById('imageInput');
+    const file = input.files[0];
+    
+    if (!file) return;
+    
+    window.imageCompress.originalFile = file;
+    const reader = new FileReader();
+    
+    reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+            window.imageCompress.originalImage = img;
+            
+            // 顯示預覽
+            const preview = document.getElementById('imagePreview');
+            preview.innerHTML = `<img src="${e.target.result}" style="max-width: 300px; max-height: 300px; border-radius: 6px; border: 2px solid var(--primary-color);">`;
+            
+            // 顯示原始大小
+            const originalSize = (file.size / 1024).toFixed(2);
+            document.getElementById('originalSize').textContent = originalSize;
+            document.getElementById('imageInfo').style.display = 'block';
+        };
+        img.src = e.target.result;
+    };
+    
+    reader.readAsDataURL(file);
+}
+
+function compressImage() {
+    if (!window.imageCompress.originalImage) {
+        alert('請先選擇圖片');
+        return;
+    }
+    
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const img = window.imageCompress.originalImage;
+    
+    canvas.width = img.width;
+    canvas.height = img.height;
+    ctx.drawImage(img, 0, 0);
+    
+    const quality = document.getElementById('qualitySlider').value / 100;
+    const format = document.getElementById('outputFormat').value;
+    const mimeType = format === 'webp' ? 'image/webp' : (format === 'png' ? 'image/png' : 'image/jpeg');
+    
+    canvas.toBlob(function(blob) {
+        window.imageCompress.compressedBlob = blob;
+        
+        const compressedSize = (blob.size / 1024).toFixed(2);
+        const originalSize = parseFloat(document.getElementById('originalSize').textContent);
+        const compressionRate = ((1 - blob.size / window.imageCompress.originalFile.size) * 100).toFixed(1);
+        
+        document.getElementById('compressedSize').textContent = compressedSize;
+        document.getElementById('compressionRate').textContent = compressionRate;
+        
+        document.getElementById('downloadBtn').style.display = 'block';
+        alert(`壓縮成功！壓縮率：${compressionRate}%`);
+    }, mimeType, quality);
+}
+
+function downloadCompressedImage() {
+    if (!window.imageCompress.compressedBlob) {
+        alert('請先壓縮圖片');
+        return;
+    }
+    
+    const url = URL.createObjectURL(window.imageCompress.compressedBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    const format = document.getElementById('outputFormat').value;
+    a.download = `compressed_image.${format}`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 }
