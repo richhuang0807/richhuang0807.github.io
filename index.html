@@ -1,24 +1,121 @@
-      </p>
-    </section>
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rich Huang - 個人網站</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 導航列 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🚀 Rich Huang</div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">首頁</a></li>
+                <li><a href="#projects" class="nav-link">作品</a></li>
+                <li><a href="#contact" class="nav-link">聯繫</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    <!-- 💻 作品展示 -->
-    <section id="projects">
-      <h2>作品</h2>
-      <ul class="projects-list">
-        <li><a href="#">目前還沒有作品</a></li>
-      </ul>
-    </section>
+    <!-- 英雄區域 -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>👋 歡迎來到我的網站</h1>
+            <p>我是 Rich Huang，一個熱愛開發的技術愛好者</p>
+            <a href="#projects" class="cta-button">探索我的作品</a>
+        </div>
+    </header>
 
-    <!-- 📬 聯繫方式 -->
-    <section id="contact">
-      <h2>如何聯繫我</h2>
-      <p>Email：<a href="mailto:richhuang81@gmail.com">richhuang81@gmail.com</a></p>
-    </section>
-  </main>
+    <main>
+        <!-- 關於我 -->
+        <section id="home" class="section">
+            <h2>關於我</h2>
+            <div class="about-content">
+                <p>我喜歡開發各種實用的工具和應用程式。這個網站展示了我的一些作品和興趣。</p>
+                <p>我致力於創建簡潔、高效且易於使用的應用程式。</p>
+            </div>
+        </section>
 
-  <!-- ===== 頁尾 ===== -->
-  <footer class="site-footer">
-    <p>© 2025 Rich Huang. All rights reserved.</p>
-  </footer>
+        <!-- 作品展示 -->
+        <section id="projects" class="section">
+            <h2>🎯 我的作品</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-icon">🛠️</div>
+                    <h3>實用工具與小遊戲</h3>
+                    <p>集合了各種日常實用工具和有趣小遊戲的平台。包括計算機、單位轉換、顏色轉換、JSON 格式化、密碼生成器、二維碼生成、文件轉換、照片壓縮等工具，以及 2048、記憶翻牌、井字棋、猜數字、貪食蛇、飛翔的鳥等遊戲。</p>
+                    <div class="project-tags">
+                        <span class="tag">HTML5</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+                    <a href="./tools/" class="project-link">進入工具網站 →</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">💡</div>
+                    <h3>即將推出</h3>
+                    <p>更多精彩的項目正在開發中，敬請期待！</p>
+                    <div class="project-tags">
+                        <span class="tag">Coming Soon</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">🌟</div>
+                    <h3>敬請期待</h3>
+                    <p>新的創意正在醞釀中，很快就會與大家分享。</p>
+                    <div class="project-tags">
+                        <span class="tag">In Development</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 技能 -->
+        <section class="section">
+            <h2>💻 技能</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <h3>前端開發</h3>
+                    <p>HTML、CSS、JavaScript</p>
+                </div>
+                <div class="skill-item">
+                    <h3>工具開發</h3>
+                    <p>實用工具、轉換器、壓縮工具</p>
+                </div>
+                <div class="skill-item">
+                    <h3>遊戲開發</h3>
+                    <p>小遊戲、互動應用</p>
+                </div>
+                <div class="skill-item">
+                    <h3>版本控制</h3>
+                    <p>Git、GitHub</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 聯繫方式 -->
+        <section id="contact" class="section">
+            <h2>📬 聯繫我</h2>
+            <div class="contact-content">
+                <p>如果您對我的作品感興趣或有任何建議，歡迎與我聯繫！</p>
+                <div class="contact-links">
+                    <a href="mailto:richhuang81@gmail.com" class="contact-link">📧 發送郵件</a>
+                    <a href="https://github.com/richhuang0807" class="contact-link" target="_blank">🐙 GitHub</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="site-footer">
+        <p>© 2025 Rich Huang. All rights reserved.</p>
+        <p>Made with ❤️ and JavaScript</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

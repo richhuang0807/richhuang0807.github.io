@@ -575,13 +575,47 @@ function getGame2048HTML() {
 function initGame2048() {
     window.game2048 = {
         board: Array(16).fill(0),
-        score: 0
+        score: 0,
+        touchStartX: 0,
+        touchStartY: 0
     };
     addNewTile2048();
     addNewTile2048();
     render2048();
     
     document.addEventListener('keydown', handle2048Input);
+    
+    const board = document.getElementById('board2048');
+    if (board) {
+        board.addEventListener('touchstart', handle2048TouchStart, false);
+        board.addEventListener('touchend', handle2048TouchEnd, false);
+    }
+}
+
+function handle2048TouchStart(e) {
+    window.game2048.touchStartX = e.changedTouches[0].screenX;
+    window.game2048.touchStartY = e.changedTouches[0].screenY;
+}
+
+function handle2048TouchEnd(e) {
+    const touchEndX = e.changedTouches[0].screenX;
+    const touchEndY = e.changedTouches[0].screenY;
+    const diffX = window.game2048.touchStartX - touchEndX;
+    const diffY = window.game2048.touchStartY - touchEndY;
+    
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+        if (diffX > 0) {
+            move2048('arrowleft');
+        } else {
+            move2048('arrowright');
+        }
+    } else {
+        if (diffY > 0) {
+            move2048('arrowup');
+        } else {
+            move2048('arrowdown');
+        }
+    }
 }
 
 function addNewTile2048() {
@@ -950,10 +984,14 @@ function initSnakeGame() {
         direction: {x: 1, y: 0},
         nextDirection: {x: 1, y: 0},
         score: 0,
-        gameOver: false
+        gameOver: false,
+        touchStartX: 0,
+        touchStartY: 0
     };
     
     document.addEventListener('keydown', handleSnakeInput);
+    canvas.addEventListener('touchstart', handleSnakeTouchStart, false);
+    canvas.addEventListener('touchend', handleSnakeTouchEnd, false);
     gameLoopSnake();
 }
 
@@ -1427,4 +1465,33 @@ function downloadCompressedImage() {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+}
+
+// 貪食蛇觸控支援函數
+function handleSnakeTouchStart(e) {
+    if (!window.snakeGame) return;
+    window.snakeGame.touchStartX = e.changedTouches[0].screenX;
+    window.snakeGame.touchStartY = e.changedTouches[0].screenY;
+}
+
+function handleSnakeTouchEnd(e) {
+    if (!window.snakeGame) return;
+    const touchEndX = e.changedTouches[0].screenX;
+    const touchEndY = e.changedTouches[0].screenY;
+    const diffX = window.snakeGame.touchStartX - touchEndX;
+    const diffY = window.snakeGame.touchStartY - touchEndY;
+    
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+        if (diffX > 0) {
+            window.snakeGame.nextDirection = {x: -1, y: 0};
+        } else {
+            window.snakeGame.nextDirection = {x: 1, y: 0};
+        }
+    } else {
+        if (diffY > 0) {
+            window.snakeGame.nextDirection = {x: 0, y: -1};
+        } else {
+            window.snakeGame.nextDirection = {x: 0, y: 1};
+        }
+    }
 }
