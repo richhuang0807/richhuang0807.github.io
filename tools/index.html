@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>實用工具與小遊戲</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🛠️ 工具遊戲站</div>
+            <ul class="nav-menu">
+                <li><a href="#tools" class="nav-link">實用工具</a></li>
+                <li><a href="#games" class="nav-link">小遊戲</a></li>
+                <li><a href="#about" class="nav-link">關於</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>實用工具 & 小遊戲</h1>
+            <p>一個集合了各種實用工具和有趣遊戲的網站</p>
+        </div>
+    </header>
+
+    <main>
+        <!-- 實用工具區域 -->
+        <section id="tools" class="section">
+            <h2>實用工具</h2>
+            <div class="grid">
+                <div class="card" onclick="openTool('calculator')">
+                    <div class="card-icon">🧮</div>
+                    <h3>計算機</h3>
+                    <p>基礎計算工具</p>
+                </div>
+                <div class="card" onclick="openTool('converter')">
+                    <div class="card-icon">📏</div>
+                    <h3>單位轉換</h3>
+                    <p>長度、重量、溫度轉換</p>
+                </div>
+                <div class="card" onclick="openTool('color')">
+                    <div class="card-icon">🎨</div>
+                    <h3>顏色轉換</h3>
+                    <p>HEX、RGB、HSL 轉換</p>
+                </div>
+                <div class="card" onclick="openTool('json')">
+                    <div class="card-icon">📋</div>
+                    <h3>JSON 格式化</h3>
+                    <p>JSON 驗證與格式化</p>
+                </div>
+                <div class="card" onclick="openTool('password')">
+                    <div class="card-icon">🔐</div>
+                    <h3>密碼生成器</h3>
+                    <p>安全密碼生成工具</p>
+                </div>
+                <div class="card" onclick="openTool('qrcode')">
+                    <div class="card-icon">📱</div>
+                    <h3>二維碼生成</h3>
+                    <p>快速生成 QR Code</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 小遊戲區域 -->
+        <section id="games" class="section">
+            <h2>小遊戲</h2>
+            <div class="grid">
+                <div class="card" onclick="openGame('2048')">
+                    <div class="card-icon">2️⃣</div>
+                    <h3>2048</h3>
+                    <p>經典數字合併遊戲</p>
+                </div>
+                <div class="card" onclick="openGame('memory')">
+                    <div class="card-icon">🧠</div>
+                    <h3>記憶翻牌</h3>
+                    <p>考驗記憶力的遊戲</p>
+                </div>
+                <div class="card" onclick="openGame('tictactoe')">
+                    <div class="card-icon">⭕</div>
+                    <h3>井字棋</h3>
+                    <p>經典對戰遊戲</p>
+                </div>
+                <div class="card" onclick="openGame('guess')">
+                    <div class="card-icon">🎯</div>
+                    <h3>猜數字</h3>
+                    <p>猜對隱藏的數字</p>
+                </div>
+                <div class="card" onclick="openGame('snake')">
+                    <div class="card-icon">🐍</div>
+                    <h3>貪食蛇</h3>
+                    <p>經典貪食蛇遊戲</p>
+                </div>
+                <div class="card" onclick="openGame('flappy')">
+                    <div class="card-icon">🐦</div>
+                    <h3>飛翔的鳥</h3>
+                    <p>躲避障礙物遊戲</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 關於區域 -->
+        <section id="about" class="section">
+            <h2>關於本站</h2>
+            <div class="about-content">
+                <p>歡迎來到實用工具與小遊戲網站！這是一個集合了各種日常實用工具和有趣小遊戲的平台。</p>
+                <p>所有工具和遊戲都在瀏覽器中運行，無需下載任何軟件，完全免費使用。</p>
+                <p>本網站支援手機和電腦等各種設備，提供最佳的使用體驗。</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- 工具/遊戲容器 -->
+    <div id="tool-container" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="tool-body"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 實用工具與小遊戲網站。保留所有權利。</p>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
