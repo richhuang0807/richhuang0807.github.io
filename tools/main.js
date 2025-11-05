@@ -1495,3 +1495,18 @@ function handleSnakeTouchEnd(e) {
         }
     }
 }
+
+// 二維碼初始化函數
+function initQRCode() {
+    // 二維碼工具初始化
+}
+
+// 密碼生成器初始化函數
+function initPassword() {
+    // 密碼生成器初始化
+}
+
+// JSON 工具初始化函數
+function initJSON() {
+    // JSON 工具初始化
+}
